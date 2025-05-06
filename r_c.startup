@@ -5,8 +5,6 @@ ip link set dev eth1 up
 
 ip route add default via 10.0.0.129
 
-echo "nameserver 8.8.8.8" > /etc/resolv.conf
-
-apt update
-apt upgrade
-apt install isc-dhcp-server
+apt update -y
+apt upgrade -y
+apt install isc-dhcp-server -y

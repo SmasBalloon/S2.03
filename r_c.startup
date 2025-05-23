@@ -1,12 +1,21 @@
+#!/bin/bash
+
+# Attribution des IP aux interfaces
 ip a add 10.0.0.130/26 dev eth0
 ip a add 172.15.99.254/22 dev eth1
+
+# Activation des interfaces
 ip link set dev eth0 up
 ip link set dev eth1 up
 
+# Définir la route par défaut
 ip route add default via 10.0.0.129
 
-echo "nameserver 8.8.8.8" > /etc/resolv.conf
+# Configurer le DNS
+echo -e "nameserver 8.8.8.8\nnameserver 8.8.4.4" > /etc/resolv.conf
 
-apt update -y
+#Mise à jour et installation
+apt update
 apt upgrade -y
-apt install isc-dhcp-server -y
+
+systemctl start isc-dhcp-server
